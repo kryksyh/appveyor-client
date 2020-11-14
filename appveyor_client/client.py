@@ -463,6 +463,23 @@ class Projects(_Base):
         method_url = 'GET /api/projects'
         return self._client._request(method_url)
 
+
+    def get_page(self, account, page):
+        """
+        Get projects on specific page
+        """
+        method_url = f'GET /api/account/{account}/projects/paged?pageIndex={page}'
+        return self._client._request(method_url)['list']
+
+
+    def get_pages_count(self, account):
+        """
+        Get projects pages count
+        """
+        method_url = f'GET /api/account/{account}/projects/paged?pageIndex=0'
+        return self._client._request(method_url)['totalPages']
+
+
     def last_build(self, account_name, project_slug):
         """
         Get project last build.
